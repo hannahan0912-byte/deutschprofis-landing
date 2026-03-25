@@ -1,518 +1,671 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>독일어 수강 신청 | deutschprofis</title>
-<style>
-:root{
-  --ink:#1a1a1a;
-  --ink2:#555;
-  --ink3:#999;
-  --bg:#f6faff;
-  --surface:#ffffff;
-  --border:rgba(0,0,0,0.1);
-  --border2:rgba(0,0,0,0.18);
-  --accent:#1d4ed8;
-  --accent-bg:#eff6ff;
-  --accent-text:#1e3a8a;
-  --radius:12px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','SF Pro KR','Noto Sans KR','Malgun Gothic',sans-serif;
-  background:linear-gradient(to bottom,#e6f0ff,#ffffff);
-  color:var(--ink);
-  min-height:100vh;
-  padding:2rem 1rem 4rem;
-}
-.page{max-width:640px;margin:0 auto}
-.eyebrow{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent);
-  font-weight:500;
-  margin-bottom:8px
-}
-h1{
-  font-size:32px;
-  font-weight:600;
-  line-height:1.25;
-  margin-bottom:10px
-}
-.intro-sub{
-  font-size:14px;
-  color:var(--ink2);
-  line-height:1.7;
-  margin-bottom:2rem
-}
-.card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:1.5rem;
-  margin-bottom:1rem
-}
-.section-title{
-  font-size:11px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--ink3);
-  font-weight:500;
-  margin-bottom:1rem
-}
-.field-label{
-  font-size:13px;
-  font-weight:500;
-  color:var(--ink);
-  margin-bottom:8px;
-  display:block
-}
-input[type=text],select,textarea{
-  width:100%;
-  font-family:inherit;
-  font-size:14px;
-  padding:11px 12px;
-  border:1px solid var(--border2);
-  border-radius:var(--radius);
-  background:#fff;
-  color:var(--ink);
-  outline:none;
-  transition:border-color .15s;
-  margin-bottom:10px
-}
-input:focus,select:focus,textarea:focus{
-  border-color:var(--accent)
-}
-textarea{
-  resize:vertical;
-  min-height:92px;
-  margin-bottom:0
-}
-.class-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-.class-card{
-  border:1.5px solid var(--border2);
-  border-radius:14px;
-  padding:1rem;
-  cursor:pointer;
-  transition:all .15s;
-  background:#fff;
-  position:relative
-}
-.class-card:hover{
-  border-color:var(--accent)
-}
-.class-card.on{
-  border-color:var(--accent);
-  background:var(--accent-bg)
-}
-.cc-badge{
-  display:inline-block;
-  font-size:11px;
-  font-weight:500;
-  padding:3px 8px;
-  border-radius:20px;
-  margin-bottom:8px;
-  background:var(--accent-bg);
-  color:var(--accent-text)
-}
-.class-card.on .cc-badge{
-  background:var(--accent);
-  color:#fff
-}
-.cc-title{
-  font-size:15px;
-  font-weight:600;
-  color:var(--ink);
-  margin-bottom:6px
-}
-.cc-detail{
-  font-size:12px;
-  color:var(--ink2);
-  line-height:1.6
-}
-.cc-price{
-  font-size:13px;
-  font-weight:600;
-  color:var(--accent);
-  margin-top:8px
-}
-.check{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  border:1.5px solid var(--border2);
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-  color:transparent;
-  transition:all .15s
-}
-.class-card.on .check{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#fff
-}
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px
-}
-.chip{
-  padding:7px 14px;
-  border:1px solid var(--border2);
-  border-radius:24px;
-  font-size:13px;
-  cursor:pointer;
-  background:#fff;
-  color:var(--ink2);
-  transition:all .15s;
-  user-select:none
-}
-.chip:hover{
-  border-color:var(--accent);
-  color:var(--accent)
-}
-.chip.on{
-  background:var(--accent-bg);
-  border-color:var(--accent);
-  color:var(--accent-text);
-  font-weight:500
-}
-.submit-btn{
-  width:100%;
-  padding:14px;
-  background:var(--ink);
-  color:#fff;
-  font-size:15px;
-  font-weight:600;
-  border:none;
-  border-radius:var(--radius);
-  cursor:pointer;
-  margin-top:.5rem;
-  transition:opacity .15s
-}
-.submit-btn:hover{opacity:.9}
-.secondary-btn{
-  width:100%;
-  padding:12px;
-  background:#fff;
-  color:#111827;
-  font-size:14px;
-  font-weight:500;
-  border:1px solid #d1d5db;
-  border-radius:var(--radius);
-  cursor:pointer;
-  margin-top:.75rem
-}
-.kakao-btn{
-  width:100%;
-  padding:13px;
-  background:#facc15;
-  color:#111827;
-  font-size:15px;
-  font-weight:600;
-  border:none;
-  border-radius:var(--radius);
-  cursor:pointer;
-  margin-top:.75rem
-}
-#done{display:none}
-.result-header{
-  font-size:28px;
-  font-weight:600;
-  margin-bottom:4px
-}
-.result-sub{
-  font-size:14px;
-  color:var(--ink2);
-  margin-bottom:1.5rem
-}
-.result-row{
-  display:flex;
-  gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid var(--border);
-  font-size:14px
-}
-.result-row:last-child{border-bottom:none}
-.rk{
-  min-width:90px;
-  color:var(--ink3);
-  flex-shrink:0
-}
-.rv{
-  color:var(--ink);
-  font-weight:500
-}
-.badge-level{
-  display:inline-block;
-  padding:2px 10px;
-  background:var(--accent-bg);
-  color:var(--accent-text);
-  border-radius:20px;
-  font-size:13px;
-  font-weight:500
-}
-.kakao-box{
-  background:#fffbea;
-  border:1px solid #fde68a;
-  border-radius:var(--radius);
-  padding:1.25rem;
-  margin-top:1rem
-}
-.kk-label{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:#92400e;
-  font-weight:500;
-  margin-bottom:10px
-}
-.kakao-box pre{
-  font-family:inherit;
-  font-size:13px;
-  color:#1c1917;
-  white-space:pre-wrap;
-  line-height:1.7
-}
-.footer-note{
-  text-align:center;
-  font-size:12px;
-  color:var(--ink3);
-  margin-top:1.5rem;
-  line-height:1.8
-}
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#111827;
-  color:#fff;
-  padding:12px 18px;
-  border-radius:10px;
-  font-size:14px;
-  z-index:9999;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-}
-@media (max-width:640px){
-  .class-grid{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deutschprofis</title>
+  <style>
+    :root{
+      --bg-top:#eaf2ff;
+      --bg-bottom:#ffffff;
+      --text:#172033;
+      --muted:#667085;
+      --line:#e6eaf0;
+      --card:#ffffff;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --blue-soft:#eff6ff;
+      --yellow:#facc15;
+      --shadow:0 10px 30px rgba(21, 35, 70, 0.06);
+      --radius-xl:32px;
+      --radius-lg:24px;
+      --radius-md:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','SF Pro KR','Noto Sans KR','Malgun Gothic',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.08), transparent 30%),
+        linear-gradient(to bottom,var(--bg-top),var(--bg-bottom));
+      line-height:1.7;
+      letter-spacing:-0.01em;
+    }
+
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 22px;
+    }
+
+    .hero{
+      padding:64px 0 28px;
+    }
+
+    .hero-shell{
+      background:rgba(255,255,255,0.88);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.8);
+      border-radius:40px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      gap:28px;
+      padding:42px;
+      align-items:stretch;
+    }
+
+    .eyebrow{
+      margin:0 0 14px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--blue);
+    }
+
+    h1{
+      margin:0;
+      font-size:42px;
+      line-height:1.18;
+      font-weight:700;
+      letter-spacing:-0.03em;
+      color:#0f172a;
+    }
+
+    .hero-sub{
+      margin:18px 0 0;
+      max-width:680px;
+      font-size:17px;
+      color:#475467;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--blue-soft);
+      color:#1e3a8a;
+      font-size:13px;
+      font-weight:600;
+      border:1px solid #dbeafe;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:26px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      padding:14px 20px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:600;
+      transition:all .16s ease;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+      box-shadow:0 8px 20px rgba(17,24,39,0.12);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      background:#000;
+    }
+
+    .btn-secondary{
+      background:#fff;
+      color:#111827;
+      border-color:#d0d5dd;
+    }
+
+    .btn-secondary:hover{
+      background:#f8fafc;
+      transform:translateY(-1px);
+    }
+
+    .hero-note{
+      margin-top:18px;
+      font-size:13px;
+      color:#667085;
+    }
+
+    .profile-card{
+      height:100%;
+      background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:0 1px 2px rgba(16,24,40,0.03);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .profile-top{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .mini-label{
+      margin:0;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .profile-title{
+      margin:0;
+      font-size:22px;
+      line-height:1.3;
+      font-weight:600;
+      color:#111827;
+    }
+
+    .profile-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .profile-item strong{
+      display:block;
+      font-size:14px;
+      font-weight:600;
+      color:#111827;
+      margin-bottom:3px;
+    }
+
+    .profile-item p{
+      margin:0;
+      font-size:14px;
+      color:#667085;
+      line-height:1.6;
+    }
+
+    .section{
+      padding:0 0 24px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .card{
+      width:100%;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      padding:28px;
+      box-shadow:0 4px 18px rgba(15,23,42,0.03);
+    }
+
+    .section-tag{
+      margin:0 0 14px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    h2{
+      margin:0;
+      font-size:24px;
+      line-height:1.3;
+      font-weight:600;
+      color:#111827;
+      letter-spacing:-0.02em;
+    }
+
+    h3{
+      margin:0;
+      font-size:18px;
+      line-height:1.4;
+      font-weight:600;
+      color:#111827;
+    }
+
+    .card p,
+    .card li{
+      font-size:15px;
+      color:#4b5565;
+    }
+
+    .body-text{
+      margin-top:14px;
+    }
+
+    .stack{
+      display:grid;
+      gap:22px;
+    }
+
+    .list{
+      list-style:none;
+      padding:0;
+      margin:18px 0 0;
+      display:grid;
+      gap:9px;
+    }
+
+    .list li::before{
+      content:"• ";
+      color:#111827;
+    }
+
+    .pricing{
+      margin-top:18px;
+      display:grid;
+      gap:24px;
+    }
+
+    .pricing-item{
+      border-top:1px solid var(--line);
+      padding-top:20px;
+    }
+
+    .pricing-item:first-child{
+      border-top:none;
+      padding-top:0;
+    }
+
+    .pricing-row{
+      display:grid;
+      grid-template-columns:1fr 300px;
+      gap:18px;
+      align-items:start;
+      margin-top:14px;
+    }
+
+    .price-box{
+      text-align:right;
+    }
+
+    .price{
+      font-size:20px;
+      font-weight:700;
+      color:var(--blue-dark);
+      white-space:nowrap;
+    }
+
+    .price-note{
+      margin-top:8px;
+      display:grid;
+      gap:4px;
+      font-size:12px;
+      line-height:1.6;
+      color:#667085;
+      word-break:keep-all;
+    }
+
+    .global-note{
+      margin-top:18px;
+      font-size:12px;
+      color:#667085;
+    }
+
+    .recommend-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .recommend-item{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px 18px;
+      background:#fbfdff;
+      font-size:14px;
+      color:#475467;
+    }
+
+    .footer{
+      margin-top:8px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,0.88);
+      backdrop-filter:blur(8px);
+    }
+
+    .footer-inner{
+      max-width:1120px;
+      margin:0 auto;
+      padding:34px 22px 44px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+
+    .footer h2{
+      margin:0;
+      font-size:30px;
+    }
+
+    .footer p{
+      margin:10px 0 0;
+      font-size:14px;
+      color:#667085;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .grid-3,
+      .pricing-row,
+      .footer-inner,
+      .recommend-grid{
+        grid-template-columns:1fr;
+        display:grid;
+      }
+
+      .hero{
+        padding-top:34px;
+      }
+
+      .hero-grid{
+        padding:24px;
+      }
+
+      .card,
+      .profile-card{
+        padding:22px;
+      }
+
+      h1{
+        font-size:31px;
+      }
+
+      .hero-sub{
+        font-size:15px;
+      }
+
+      .price-box,
+      .price,
+      .price-note{
+        text-align:left;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="page">
 
-<div id="form-section">
-  <div class="eyebrow">deutschprofis · Berlin</div>
-  <h1>독일어 수강 신청</h1>
-  <p class="intro-sub">
-    아래 정보를 입력하시면 카카오톡 문의 메시지가 자동으로 생성됩니다.<br>
-    제출 후 오픈채팅으로 이동하며, <strong>붙여넣기 후 전송만 해주시면 됩니다.</strong>
-  </p>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-shell">
+          <div class="hero-grid">
 
-  <div class="card">
-    <div class="section-title">기본 정보</div>
-    <label class="field-label">이름</label>
-    <input type="text" id="name" placeholder="홍길동">
-    <label class="field-label">연락처</label>
-    <input type="text" id="contact" placeholder="카카오톡 ID 또는 전화번호" style="margin-bottom:0">
-  </div>
+            <div>
+              <p class="eyebrow">Berlin · deutschprofis</p>
+              <h1>베를린에서 배우는 독일어,<br>조금 더 정교하고 안정적으로</h1>
+              <p class="hero-sub">
+                독일 현지 학부 졸업, 교육학 이수, 통계학 석사 재학 중인 강사가
+                시험 대비부터 실전 회화까지 체계적인 커리큘럼으로 직접 지도합니다.
+              </p>
 
-  <div class="card">
-    <div class="section-title">수업 선택</div>
-    <label class="field-label" style="margin-bottom:12px">희망하는 수업을 선택해 주세요 (복수 선택 가능)</label>
-    <div class="class-grid">
+              <div class="hero-badges">
+                <span class="badge">독일 현지 학부 졸업</span>
+                <span class="badge">B1·B2 시험 대비</span>
+                <span class="badge">최대 4명 소수 그룹반</span>
+                <span class="badge">1:1 말하기 집중 수업</span>
+              </div>
 
-      <div class="class-card" data-v="B1 시험 준비반" onclick="this.classList.toggle('on')">
-        <div class="check">✓</div>
-        <div class="cc-badge">B1</div>
-        <div class="cc-title">B1 시험 준비반</div>
-        <div class="cc-detail">매주 월·수 저녁<br>최대 4명 소수 정원<br>매달 새로 시작</div>
-        <div class="cc-price">월 300유로</div>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="./survey.html">수강 신청 (설문 작성)</a>
+                <a class="btn btn-secondary" href="https://open.kakao.com/o/sBxAfATd" target="_blank" rel="noopener">카카오톡 문의</a>
+              </div>
+
+              <div class="hero-note">
+                자세한 수업 정보 확인 후 설문 작성 → 카카오톡 상담으로 이어집니다.
+              </div>
+            </div>
+
+            <aside class="profile-card">
+              <div class="profile-top">
+                <p class="mini-label">핵심 정보</p>
+                <h2 class="profile-title">시험 대비, 개인 과외, 소수 그룹반까지 한 곳에서</h2>
+
+                <div class="profile-list">
+                  <div class="profile-item">
+                    <strong>수업 형태</strong>
+                    <p>1:1 개인 과외 · 어린이 수업 · B1 그룹 · B2 그룹</p>
+                  </div>
+                  <div class="profile-item">
+                    <strong>진행 방식</strong>
+                    <p>온라인(Zoom) 기본 · 아이·청소년 대면 협의 가능</p>
+                  </div>
+                  <div class="profile-item">
+                    <strong>자료 제공</strong>
+                    <p>수업 후 Notion으로 자료 및 학습 기록 공유</p>
+                  </div>
+                  <div class="profile-item">
+                    <strong>상담 방식</strong>
+                    <p>60분 진단 수업 후 진행</p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="grid-3">
+
+          <div class="card">
+            <p class="section-tag">수업 방식</p>
+            <h2>이해를 바탕으로 쌓는 독일어</h2>
+            <p class="body-text">
+              문법·듣기·읽기·쓰기·말하기를 따로 떼어내기보다, 서로 연결된 구조 안에서 자연스럽게 익히는 수업을 지향합니다.
+              단순 암기보다 구조를 이해하고 반복하며 익숙해지도록 지도합니다.
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="section-tag">시험 대비</p>
+            <h2>시험에 맞는 전략까지 함께</h2>
+            <p class="body-text">
+              Goethe-Zertifikat A1–C1, telc Deutsch A1–B2 / telc Hochschule C1,
+              TestDaF / DSH / ÖSD 등 독일 대학 입학 및 체류 관련 시험 전반을 준비합니다.
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="section-tag">어린이·청소년</p>
+            <h2>발달 단계에 맞춘 지도</h2>
+            <p class="body-text">
+              국제학교 및 독일 초등학생 지도 경험을 바탕으로,
+              언어 학습뿐 아니라 학습 태도와 습관까지 함께 잡는 수업을 목표로 합니다.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap stack">
+
+        <div class="card">
+          <p class="section-tag">강사 이력</p>
+          <h2>독일에서 공부하고, 독일어로 살아온 경험을 바탕으로</h2>
+          <ul class="list">
+            <li>Humboldt-Universität zu Berlin / FU / Charité / TU 통합 통계학 석사 과정 재학</li>
+            <li>독일 Bamberg Universität 사회학 전공 졸업</li>
+            <li>학부 재학 당시 유일한 외국인으로 모든 전공 수업·세미나를 독일어로 수행</li>
+            <li>교육학 병행 이수 — 아동·청소년·성인 학습자 지도법</li>
+            <li>telc Deutsch C1 Hochschule 취득 (2019)</li>
+            <li>독일 NGO 인턴십 — 현지 사회 및 업무 환경 경험</li>
+            <li>개인 과외 3년 이상</li>
+            <li>독일어 학원 B1 시험 대비반 담당 경험</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="section-tag">수업 형태 및 수업료</p>
+          <h2>목표와 상황에 맞게 선택할 수 있는 수업 구성</h2>
+
+          <div class="pricing">
+
+            <div class="pricing-item">
+              <h3>1:1 개인 과외 · 성인</h3>
+              <div class="pricing-row">
+                <div>
+                  <ul class="list">
+                    <li>회당 90분 진행</li>
+                    <li>기본 주 2회 수업</li>
+                    <li>짧은 시간 안에 효율을 극대화하기에 가장 적합한 방식</li>
+                    <li>모든 난이도 수업 진행 가능</li>
+                    <li>말하기 집중 수업 진행 가능</li>
+                  </ul>
+                </div>
+                <div class="price-box">
+                  <div class="price">월 8회 420유로</div>
+                  <div class="price-note">
+                    <div>* 월 8회 중 최대 2회까지 다음 수업으로 이월 가능</div>
+                    <div>* 그 외 사유는 수업 차감 및 보충 없음</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pricing-item">
+              <h3>어린이·청소년</h3>
+              <div class="pricing-row">
+                <div>
+                  <ul class="list">
+                    <li>주 1회 1시간 수업</li>
+                    <li>온라인(Zoom) 기본</li>
+                    <li>대면 수업은 Berlin Friedrichshain-Mitte 협의 가능</li>
+                  </ul>
+                </div>
+                <div class="price-box">
+                  <div class="price">월 4회 180유로</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pricing-item">
+              <h3>B1 소수 그룹반</h3>
+              <div class="pricing-row">
+                <div>
+                  <ul class="list">
+                    <li>매주 월·수 19:00–20:30</li>
+                    <li>최대 4명 소수 정원</li>
+                    <li>학원식 커리큘럼 기반 수업</li>
+                  </ul>
+                </div>
+                <div class="price-box">
+                  <div class="price">월 8회 300유로</div>
+                  <div class="price-note">
+                    <div>* 월 8회 기준 진행 (5주차 있는 달은 남는 요일 휴강)</div>
+                    <div>* 결석 시 보충 없음</div>
+                    <div>* 수업 자료 및 진도 Notion 공유</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pricing-item">
+              <h3>B2 소수 그룹반</h3>
+              <div class="pricing-row">
+                <div>
+                  <ul class="list">
+                    <li>매주 월·목 오전 수업</li>
+                    <li>8시 또는 9시 시작 (수강생과 조율)</li>
+                    <li>최대 4명 소수 정원</li>
+                  </ul>
+                </div>
+                <div class="price-box">
+                  <div class="price">월 8회 300유로</div>
+                  <div class="price-note">
+                    <div>* 월 8회 기준 진행 (5주차 있는 달은 남는 요일 휴강)</div>
+                    <div>* 결석 시 보충 없음</div>
+                    <div>* 수업 자료 및 진도 Notion 공유</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="global-note">
+            * 모든 수업은 계약서 동의 후에만 진행됩니다.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="card">
+          <p class="section-tag">이런 분께 추천</p>
+          <h2>이런 분들께 특히 잘 맞습니다</h2>
+
+          <div class="recommend-grid">
+            <div class="recommend-item">체계적인 커리큘럼을 따라 꾸준히 실력을 쌓고 싶은 분</div>
+            <div class="recommend-item">시험 합격을 목표로 집중적으로 준비하고 싶은 분</div>
+            <div class="recommend-item">말하기 실력을 확실하게 끌어올리고 싶은 분</div>
+            <div class="recommend-item">독일에서 자연스럽게 소통하는 독일어를 원하는 분</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <h2>문의</h2>
+        <p>
+          수강 신청 설문을 먼저 작성해 주세요.<br>
+          작성 후 카카오톡으로 연결되어 빠르게 상담이 진행됩니다.
+        </p>
       </div>
 
-      <div class="class-card" data-v="B2 준비반" onclick="this.classList.toggle('on')">
-        <div class="check">✓</div>
-        <div class="cc-badge">B2</div>
-        <div class="cc-title">B2 준비반</div>
-        <div class="cc-detail">매주 월·목 오전<br>8시 또는 9시 시작<br>최대 4명 소수 정원</div>
-        <div class="cc-price">월 300유로</div>
+      <div class="hero-actions" style="margin-top:0;">
+        <a class="btn btn-secondary" href="./survey.html">설문 작성</a>
+        <a class="btn btn-kakao" href="https://open.kakao.com/o/sBxAfATd" target="_blank" rel="noopener">오픈채팅</a>
       </div>
-
-      <div class="class-card" data-v="1:1 개인 과외" onclick="this.classList.toggle('on')">
-        <div class="check">✓</div>
-        <div class="cc-badge" style="background:#f3f4f6;color:#374151">개인</div>
-        <div class="cc-title">1:1 개인 과외</div>
-        <div class="cc-detail">모든 난이도 가능<br>말하기 집중 수업 가능<br>온라인(Zoom) 기본</div>
-        <div class="cc-price">월 8회 420유로</div>
-      </div>
-
-      <div class="class-card" data-v="어린이·청소년 과외" onclick="this.classList.toggle('on')">
-        <div class="check">✓</div>
-        <div class="cc-badge" style="background:#f0fdf4;color:#166534">어린이</div>
-        <div class="cc-title">어린이·청소년</div>
-        <div class="cc-detail">주 1회 1시간<br>온라인 기본 / 대면 협의<br>교육학 기반 지도</div>
-        <div class="cc-price">월 4회 180유로</div>
-      </div>
-
     </div>
-  </div>
+  </footer>
 
-  <div class="card">
-    <div class="section-title">현재 수준</div>
-    <label class="field-label">독일어 레벨 (자가 진단)</label>
-    <select id="level">
-      <option value="">-- 선택해 주세요 --</option>
-      <option value="A1">A1 — 완전 초급 / 처음 시작</option>
-      <option value="A2">A2 — 기초 완료, B1 준비 중</option>
-      <option value="B1">B1 — 중급, 시험 준비 단계</option>
-      <option value="B2">B2 — 상중급</option>
-      <option value="C1+">C1 이상</option>
-      <option value="모름">잘 모르겠음 (진단 수업 희망)</option>
-    </select>
-  </div>
-
-  <div class="card">
-    <div class="section-title">학습 목표</div>
-    <label class="field-label">목표 시험 또는 목적 (복수 선택)</label>
-    <div class="chips" id="goals">
-      <span class="chip" data-v="Goethe">Goethe</span>
-      <span class="chip" data-v="telc">telc</span>
-      <span class="chip" data-v="TestDaF">TestDaF</span>
-      <span class="chip" data-v="DSH">DSH</span>
-      <span class="chip" data-v="ÖSD">ÖSD</span>
-      <span class="chip" data-v="일상 회화">일상 회화</span>
-      <span class="chip" data-v="독일 유학">독일 유학 준비</span>
-      <span class="chip" data-v="업무 독일어">업무 독일어</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="section-title">추가 메모</div>
-    <label class="field-label">시험 일정, 약한 영역, 기타 요청사항 (선택)</label>
-    <textarea id="memo" placeholder="예) 4월 말 Goethe B1 시험 예정 / 말하기가 특히 약함 / B2반 9시 시작 희망 등"></textarea>
-  </div>
-
-  <button class="submit-btn" onclick="submitForm()">제출하기</button>
-</div>
-
-<div id="done">
-  <div class="eyebrow">완료</div>
-  <div class="result-header">신청이 완성됐어요</div>
-  <p class="result-sub">메시지가 자동으로 복사되고, 오픈채팅으로 연결됩니다.</p>
-
-  <div class="card">
-    <div class="section-title">신청 요약</div>
-    <div id="result-body"></div>
-  </div>
-
-  <div class="kakao-box">
-    <div class="kk-label">카카오톡 복사용 메시지</div>
-    <pre id="kakao-text"></pre>
-  </div>
-
-  <button class="kakao-btn" onclick="goKakao()">오픈채팅으로 이동하기</button>
-  <button class="secondary-btn" onclick="copyMsg()">메시지 다시 복사하기</button>
-  <button class="secondary-btn" onclick="sendEmail()">이메일로 보내기</button>
-
-  <div class="footer-note">
-    카카오톡 오픈채팅 / 이메일로 문의하실 수 있습니다.
-  </div>
-</div>
-
-</div>
-
-<script>
-document.querySelectorAll('#goals .chip').forEach(c=>{
-  c.onclick=()=>c.classList.toggle('on')
-})
-
-let msgText=''
-
-function showToast(message){
-  const toast=document.createElement('div')
-  toast.className='toast'
-  toast.textContent=message
-  document.body.appendChild(toast)
-  setTimeout(()=>toast.remove(),3000)
-}
-
-function submitForm(){
-  const name=document.getElementById('name').value.trim()
-  const contact=document.getElementById('contact').value.trim()
-  const level=document.getElementById('level').value
-  const classes=[...document.querySelectorAll('.class-card.on')].map(c=>c.dataset.v).join(', ')
-  const goals=[...document.querySelectorAll('#goals .chip.on')].map(c=>c.dataset.v).join(', ')
-  const memo=document.getElementById('memo').value.trim()
-
-  if(!name){alert('이름을 입력해 주세요');return}
-  if(!level){alert('현재 레벨을 선택해 주세요');return}
-  if(!classes){alert('희망 수업을 선택해 주세요');return}
-
-  document.getElementById('result-body').innerHTML=`
-    <div class="result-row"><span class="rk">이름</span><span class="rv">${name}</span></div>
-    <div class="result-row"><span class="rk">연락처</span><span class="rv">${contact||'—'}</span></div>
-    <div class="result-row"><span class="rk">신청 수업</span><span class="rv">${classes}</span></div>
-    <div class="result-row"><span class="rk">현재 레벨</span><span class="rv"><span class="badge-level">${level}</span></span></div>
-    ${goals?`<div class="result-row"><span class="rk">목표</span><span class="rv">${goals}</span></div>`:''}
-    ${memo?`<div class="result-row"><span class="rk">메모</span><span class="rv">${memo}</span></div>`:''}
-  `
-
-  msgText=`[수강 신청 - deutschprofis]
-이름: ${name}
-연락처: ${contact||'—'}
-신청 수업: ${classes}
-현재 레벨: ${level}${goals?'\n목표: '+goals:''}${memo?'\n메모: '+memo:''}`.trim()
-
-  document.getElementById('kakao-text').textContent=msgText
-  document.getElementById('form-section').style.display='none'
-  document.getElementById('done').style.display='block'
-  window.scrollTo({top:0,behavior:'smooth'})
-
-  navigator.clipboard.writeText(msgText).then(()=>{
-    setTimeout(()=>{
-      goKakao(true)
-    },300)
-  }).catch(()=>{
-    showToast('메시지를 직접 복사한 뒤 보내 주세요.')
-  })
-}
-
-function copyMsg(){
-  navigator.clipboard.writeText(msgText).then(()=>{
-    showToast('메시지가 복사되었습니다.')
-  }).catch(()=>{
-    alert('직접 텍스트를 선택해서 복사해 주세요.')
-  })
-}
-
-function goKakao(fromAuto){
-  const kakaoLink = "https://open.kakao.com/o/sBxAfATd"
-  window.open(kakaoLink, "_blank")
-  if(fromAuto){
-    showToast("오픈채팅이 열렸어요. 붙여넣고 전송해 주세요.")
-  } else {
-    showToast("오픈채팅으로 이동합니다.")
-  }
-}
-
-function sendEmail(){
-  const subject = encodeURIComponent("독일어 수강 신청")
-  const body = encodeURIComponent(msgText)
-  window.location.href = `mailto:onlyku446@gmail.com?subject=${subject}&body=${body}`
-}
-</script>
 </body>
 </html>
