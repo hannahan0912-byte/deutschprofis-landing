@@ -6,25 +6,30 @@
   <title>Deutschprofis</title>
   <style>
     @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     :root{
-      --bg-top:#e6f0ff;
+      --bg-top:#f4f6f8;
+      --bg-mid:#eef2f6;
       --bg-bottom:#ffffff;
       --text:#1f2937;
-      --muted:#6b7280;
+      --muted:#667085;
       --line:#e5e7eb;
       --card:#ffffff;
-      --blue:#2563eb;
-      --blue-dark:#1d4ed8;
+      --blue:#1d4ed8;
+      --blue-dark:#1e3a8a;
       --yellow:#facc15;
+      --navy:#0f172a;
+      --shadow:0 10px 28px rgba(15,23,42,0.06);
+      --shadow-hover:0 18px 36px rgba(15,23,42,0.10);
     }
 
     *{ box-sizing:border-box; }
@@ -32,15 +37,18 @@
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','SF Pro KR','Noto Sans KR','Malgun Gothic',sans-serif;
-      background:linear-gradient(to bottom,var(--bg-top),var(--bg-bottom));
+      background:
+        radial-gradient(circle at top left, rgba(15,23,42,0.04), transparent 28%),
+        linear-gradient(to bottom, var(--bg-top), var(--bg-mid) 42%, var(--bg-bottom));
       color:var(--text);
-      line-height:1.65;
+      line-height:1.7;
+      letter-spacing:-0.01em;
     }
 
     .wrap{
-      max-width:960px;
+      max-width:1000px;
       margin:0 auto;
-      padding:0 20px;
+      padding:0 22px;
     }
 
     .hero{
@@ -50,45 +58,48 @@
     .hero-card,
     .card{
       width:100%;
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:28px;
-      box-shadow:0 1px 3px rgba(0,0,0,0.04);
+      background:rgba(255,255,255,0.92);
+      border:1px solid rgba(15,23,42,0.07);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
     }
 
     .hero-card{
-      padding:34px 32px;
+      padding:36px 34px;
+      animation:fadeUp .7s ease both;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.2fr 0.8fr;
-      gap:28px;
+      grid-template-columns:1.18fr 0.82fr;
+      gap:24px;
       align-items:start;
     }
 
     .eyebrow{
       margin:0 0 12px;
       font-size:12px;
-      letter-spacing:.16em;
+      letter-spacing:.18em;
       text-transform:uppercase;
       color:var(--blue);
-      font-weight:500;
+      font-weight:600;
     }
 
     h1{
       margin:0;
-      font-size:27px;
-      line-height:1.3;
-      font-weight:600;
-      letter-spacing:-0.02em;
-      color:#111827;
+      font-size:30px;
+      line-height:1.28;
+      font-weight:650;
+      letter-spacing:-0.03em;
+      color:var(--navy);
     }
 
     .sub{
-      margin:14px 0 0;
+      margin:15px 0 0;
       font-size:15px;
-      color:#4b5563;
+      color:#475467;
+      max-width:620px;
     }
 
     .btn-row{
@@ -99,59 +110,67 @@
     }
 
     .btn{
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       text-decoration:none;
       padding:13px 18px;
       border-radius:16px;
       font-size:14px;
-      font-weight:500;
-      transition:.15s ease;
+      font-weight:600;
+      transition:all .18s ease;
     }
 
     .btn-primary{
-      background:#111827;
+      background:var(--navy);
       color:#ffffff;
+      box-shadow:0 10px 24px rgba(15,23,42,0.14);
     }
 
     .btn-primary:hover{
-      background:#000000;
+      background:#020617;
+      transform:translateY(-1px);
     }
 
     .btn-kakao{
       background:var(--yellow);
       color:#111827;
+      box-shadow:0 8px 20px rgba(250,204,21,0.18);
     }
 
     .btn-kakao:hover{
-      filter:brightness(.97);
+      filter:brightness(.98);
+      transform:translateY(-1px);
     }
 
     .btn-outline{
       background:#ffffff;
       color:#111827;
-      border:1px solid #d1d5db;
+      border:1px solid #d0d5dd;
     }
 
     .btn-outline:hover{
-      background:#f9fafb;
+      background:#f8fafc;
+      transform:translateY(-1px);
     }
 
     .side-box{
       width:100%;
-      border:1px solid var(--line);
-      border-radius:24px;
-      background:#ffffff;
+      border:1px solid rgba(15,23,42,0.07);
+      border-radius:26px;
+      background:linear-gradient(180deg,#ffffff 0%, #fafbfd 100%);
       padding:24px;
+      box-shadow:0 8px 24px rgba(15,23,42,0.04);
     }
 
     .section-label,
     .side-title{
       margin:0;
       font-size:12px;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
       color:var(--muted);
-      font-weight:500;
+      font-weight:600;
     }
 
     .side-list{
@@ -163,7 +182,7 @@
     .side-list strong{
       display:block;
       font-size:14px;
-      font-weight:500;
+      font-weight:600;
       color:#111827;
       margin-bottom:4px;
     }
@@ -172,6 +191,7 @@
       margin:0;
       font-size:14px;
       color:#4b5563;
+      line-height:1.65;
     }
 
     .section{
@@ -185,22 +205,28 @@
     }
 
     .card{
-      padding:26px;
+      padding:28px;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-hover);
     }
 
     h2{
       margin:0;
       font-size:22px;
       line-height:1.35;
-      font-weight:600;
-      letter-spacing:-0.01em;
-      color:#111827;
+      font-weight:650;
+      letter-spacing:-0.02em;
+      color:var(--navy);
     }
 
     h3{
       margin:0;
       font-size:17px;
-      font-weight:500;
+      font-weight:600;
       color:#111827;
     }
 
@@ -230,6 +256,7 @@
     .list li::before{
       content:"• ";
       color:#111827;
+      font-weight:700;
     }
 
     .pricing{
@@ -257,11 +284,12 @@
     }
 
     .price{
-      font-size:18px;
-      font-weight:600;
+      font-size:19px;
+      font-weight:700;
       color:var(--blue-dark);
       text-align:right;
       white-space:nowrap;
+      letter-spacing:-0.01em;
     }
 
     .price-note{
@@ -283,14 +311,15 @@
 
     .footer{
       margin-top:8px;
-      background:#ffffff;
-      border-top:1px solid var(--line);
+      background:rgba(255,255,255,0.9);
+      border-top:1px solid rgba(15,23,42,0.06);
+      backdrop-filter:blur(8px);
     }
 
     .footer-inner{
-      max-width:960px;
+      max-width:1000px;
       margin:0 auto;
-      padding:34px 20px 44px;
+      padding:34px 22px 44px;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -350,7 +379,8 @@
               <h1>독일어 전문 과외 · 소수 그룹반 · 체계적 커리큘럼</h1>
               <p class="sub">
                 독일 현지 사회학 학부 졸업 · 교육학 이수 · 통계학 석사 재학<br>
-                시험 대비부터 실전 회화까지 안정적으로 지도합니다.
+                시험 대비부터 실전 회화까지 안정적으로 지도합니다.<br>
+                제대로 된 선생님과 함께 공부하는 것이 독일어를 가장 빠르고 안정적으로 익히는 길입니다.
               </p>
 
               <div class="btn-row">
@@ -376,7 +406,7 @@
                 <div>
                   <strong>상담</strong>
                   <p>60분 유료 진단 수업 후 진행</p>
-                  <p>*왕초보반, 시험대비반 제외</p>
+                  <p>* 왕초보반, 시험대비반 제외</p>
                 </div>
               </div>
             </aside>
@@ -411,7 +441,7 @@
             <p class="plain-text">
               국제학교 및 독일 초등학생 지도 경험을 바탕으로, 발달 단계에 맞는 수업을 진행합니다.
               단순한 언어 학습을 넘어서 학습 태도와 습관까지 함께 잡는 수업을 목표로 합니다.
-              해당 수업은 독일 8학년까지 해당되며, 9학년부터는 상담 이후 성인 요금으로 진행됩니다.  
+              해당 수업은 독일 8학년까지 해당되며, 9학년부터는 상담 이후 성인 요금으로 진행됩니다.
             </p>
           </div>
         </div>
@@ -425,7 +455,7 @@
           <p class="section-label">강사 이력</p>
           <ul class="list">
             <li>Humboldt-Universität zu Berlin / FU / Charité / TU 통합 통계학 석사 과정 재학</li>
-            <li>독일 Bamberg Universität 사회학 전공 졸업_사회학은 철학과 더불어 가장 높은 난이도의 독일어를 요구하는 학문</li>
+            <li>독일 Bamberg Universität 사회학 전공 졸업 — 사회학은 철학과 더불어 높은 난이도의 독일어를 요구하는 학문</li>
             <li>학부 재학 당시 유일한 외국인으로 모든 전공 수업·세미나를 독일어로 수행</li>
             <li>교육학 병행 이수 — 아동·청소년·성인 학습자 지도법</li>
             <li>telc Deutsch C1 Hochschule 취득 (2019)</li>
@@ -504,7 +534,7 @@
               <div class="pricing-row">
                 <div>
                   <ul class="list">
-                    <li>매주 월·목 08:00-09:30 수업</li>
+                    <li>매주 월·목 08:00–09:30 수업</li>
                     <li>최대 4명 소수 정원</li>
                     <li>학원식 커리큘럼 기반 수업</li>
                   </ul>
